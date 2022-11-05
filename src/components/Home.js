@@ -19,7 +19,6 @@ import Footer from "./Footer";
 function Home() {
     return (
         <>
-        <Navbar />
         <header className="section">
             <div className="container text">
                 <img className="logo-desktop" src={logoHeader} alt="logo" />
@@ -88,7 +87,6 @@ function Home() {
                 </div>
             </div>
         </section>
-        <Footer />
         </>
     )
 }
