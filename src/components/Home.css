@@ -40,6 +40,7 @@ header h4 {
 header .text {
     max-width: 389px;
     margin-left: 0;
+    position: relative;
 }
 
 input.form-control {
@@ -142,6 +143,32 @@ header .logo-desktop {
 
 header .logo-mobile {
     display: none;
+}
+
+.modal-header {
+    border: none !important;
+    padding-bottom: 0 !important;
+}
+
+.results {
+    background-color: white;
+    height: 200px;
+    overflow-y: scroll;
+    margin-top: 1rem;
+    border-radius: 24px;
+    position: absolute;
+    width: 95%;
+    padding: 1rem;
+}
+
+.results .result {
+    padding: 1rem;
+    border-radius: 12px;
+}
+
+.results .result:hover {
+    background: rgba(151, 151, 151, 0.1);
+    color: black;
 }
 
 @media (max-width: 1024px) {

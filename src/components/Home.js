@@ -1,22 +1,45 @@
-import React from "react";
-import logoHeader from "../assets/img/logo_header.svg";
-import logoHeaderMobile from "../assets/img/logo_header_mobile.svg";
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
-import cat1 from '../assets/img/cat1.png'
-import cat2 from '../assets/img/cat2.png'
-import cat3 from '../assets/img/cat3.png'
-import cat4 from '../assets/img/cat4.png'
-import img1 from '../assets/img/image 1.png'
-import img2 from '../assets/img/image 2.png'
-import img3 from '../assets/img/image 3.png'
+import { React, useState, useEffect } from "react";
+import { cat1, cat2, cat3, cat4, img1, img2, img3, logoHeader, logoHeaderMobile } from '../assets'
+import { Modal, Form, InputGroup, Button } from "react-bootstrap";
 import { AiOutlineSearch } from 'react-icons/ai';
 import "./Home.css";
-import { ModalFooter } from "react-bootstrap";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
+import { Link } from "react-router-dom";
 
 function Home() {
+    const [search, setSearch] = useState('');
+    const [show, setShow] = useState(false);
+    const [resultShow, setResultShow] = useState(false);
+    const [cats, setCats] = useState([]);
+
+    const handleSearch = (event) => {
+        const { value } = event.target
+    
+        setSearch(value)
+        setResultShow(true)
+        
+        // if(value.length >= 3) {
+        //     this.timeId = setTimeout(() => {
+        //         const { uplayNick } = this.state
+        
+        //         ValkCupService.users({uplayNick})
+        //         .then(users => {
+        //             // console.log('counter => ', ++this.counter)
+        //             this.setState({ users }, () => console.info('state => ', this.state.users))
+        //         // })
+        //     }, 500)
+    
+        // } else if(value.length <= 0) {
+        //     this.setState({ users: [] })
+        // }
+    }
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    useEffect(() => {
+        
+    })
+
     return (
         <>
         <header className="section">
@@ -29,14 +52,25 @@ function Home() {
                     aria-label="Large"
                     aria-describedby="inputGroup-sizing-sm"
                     placeholder="Enter your breed"
+                    onChange={ handleSearch }
                     />
                     <InputGroup.Text id="inputGroup-sizing-lg"><AiOutlineSearch /> </InputGroup.Text>
                 </InputGroup>
+                {resultShow ?
+                    <div className="results d-flex flex-column">
+                        <Link className="result" to="">Gato1</Link>
+                        <Link className="result" to="">Gato2</Link>
+                        <Link className="result" to="">Gato3</Link>
+                        <Link className="result" to="">Gato4</Link>
+                    </div> 
+                 : 
+                 ''}
                 <InputGroup className="small" size="md">
                     <Form.Control
                     aria-label="small"
                     aria-describedby="inputGroup-sizing-sm"
                     placeholder="Search"
+                    onClick={ handleShow }
                     />
                     <InputGroup.Text id="inputGroup-sizing-lg"><AiOutlineSearch /> </InputGroup.Text>
                 </InputGroup>
@@ -47,25 +81,25 @@ function Home() {
             <hr/>
             <div className="d-flex justify-content-between align-items-end flex-sm-column flex-lg-row">
                 <h2>66+ Breeds For you<br/>to discover</h2>
-                <a className="more" href="#">SEE MORE -</a>
+                <Link className="more" to="/top-ten">SEE MORE -</Link>
             </div>
             <div className="cats row d-flex justify-content-between">
-                <a href="#" className="col-lg-3 col-sm-6 cat">
+                <Link to="#" className="col-lg-3 col-sm-6 cat">
                     <img src={cat1} alt="cat1"/>
                     <p>Bengal</p>
-                </a>
-                <a href="#" className="col-lg-3 col-sm-6 cat">
+                </Link>
+                <Link to="#" className="col-lg-3 col-sm-6 cat">
                     <img src={cat2} alt="cat1"/>
                     <p>Savannah</p>
-                </a> 
-                <a href="#" className="col-lg-3 col-sm-6 cat">
+                </Link> 
+                <Link to="#" className="col-lg-3 col-sm-6 cat">
                     <img src={cat3} alt="cat1"/>
                     <p>Norwegian Forest Cat</p>
-                </a>
-                <a href="#" className="col-lg-3 col-sm-6 cat">
+                </Link>
+                <Link to="#" className="col-lg-3 col-sm-6 cat">
                     <img src={cat4} alt="cat1"/>
                     <p>Selkirk Rex</p>
-                </a>
+                </Link>
             </div>
         </section>
         <section className="section why-have-cats">
@@ -74,7 +108,7 @@ function Home() {
                     <hr />
                     <h2>Why should you<br/>have a cat?</h2>
                     <p>Having a cat around you can actually trigger the release of calming chemicals in your body which lower your stress and anxiety leves</p>
-                    <a href="#">READ MORE -</a>
+                    <Link to="#">READ MORE -</Link>
                 </div>
                 <div className="d-flex col-lg-7 col-md-12">
                     <div className="d-flex flex-column align-items-end">
@@ -87,6 +121,26 @@ function Home() {
                 </div>
             </div>
         </section>
+        <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+        </Modal.Header>
+        <Modal.Body>
+            <InputGroup className="large-modal" size="lg">
+                <Form.Control
+                aria-label="Large"
+                aria-describedby="inputGroup-sizing-sm"
+                placeholder="Enter your breed"
+                onChange={ handleSearch }
+                />
+                <InputGroup.Text id="inputGroup-sizing-lg"><AiOutlineSearch /> </InputGroup.Text>
+            </InputGroup>
+        </Modal.Body>
+      </Modal>
         </>
     )
 }

@@ -1,11 +1,14 @@
 import React from "react";
-import logo from "../assets/img/CatwikiLogo.svg";
+import { logo } from "../assets";
+import { Link } from "react-router-dom";
 import "./Nabvar.css"
 
 function Navbar() {
     return (
         <section className="section logo">
-            <img src={logo} alt="logo"/>
+            <Link to="/">
+                <img src={logo} alt="logo"/>
+            </Link>
         </section>
     )
 }
