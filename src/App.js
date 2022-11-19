@@ -13,7 +13,7 @@ function App() {
     <div className='main'>
       <Routes>
         <Route path='/' element={<Home/>} />
-        <Route path='/specific-cat' element={<SpecificCat/>} />
+        <Route path='/:cat' element={<SpecificCat/>} />
         <Route path='/top-ten' element={<TopTen />} />
       </Routes>
     </div>

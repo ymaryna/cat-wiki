@@ -4,41 +4,41 @@ import { Modal, Form, InputGroup, Button } from "react-bootstrap";
 import { AiOutlineSearch } from 'react-icons/ai';
 import "./Home.css";
 import { Link } from "react-router-dom";
+import WikiCatApi from "../services/WikiCatApi";
+import { useDebugValue } from "react";
 
 function Home() {
-    const [search, setSearch] = useState('');
+    const [search, setSearch] = useState({search: ''});
     const [show, setShow] = useState(false);
     const [resultShow, setResultShow] = useState(false);
     const [cats, setCats] = useState([]);
 
     const handleSearch = (event) => {
         const { value } = event.target
+
+        if(value.length >= 3) {
+            setTimeout(() => {
+                setSearch({search: value})
+                setResultShow(true)
+            }, 500)
     
-        setSearch(value)
-        setResultShow(true)
-        
-        // if(value.length >= 3) {
-        //     this.timeId = setTimeout(() => {
-        //         const { uplayNick } = this.state
-        
-        //         ValkCupService.users({uplayNick})
-        //         .then(users => {
-        //             // console.log('counter => ', ++this.counter)
-        //             this.setState({ users }, () => console.info('state => ', this.state.users))
-        //         // })
-        //     }, 500)
-    
-        // } else if(value.length <= 0) {
-        //     this.setState({ users: [] })
-        // }
+        } else if(value.length <= 2) {
+            setSearch({})
+            setResultShow(false)
+        }
     }
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     useEffect(() => {
-        
-    })
+
+        WikiCatApi.search(search)
+        .then(cats => {
+            setCats(cats)
+            console.log(cats)
+        })
+    },[search])
 
     return (
         <>
@@ -58,10 +58,9 @@ function Home() {
                 </InputGroup>
                 {resultShow ?
                     <div className="results d-flex flex-column">
-                        <Link className="result" to="">Gato1</Link>
-                        <Link className="result" to="">Gato2</Link>
-                        <Link className="result" to="">Gato3</Link>
-                        <Link className="result" to="">Gato4</Link>
+                        {cats.map((cat, index) =>
+                            <Link to={`/${cat.name}`} key={index} state={{cat}}>{cat.name}</Link>
+                        )}
                     </div> 
                  : 
                  ''}
