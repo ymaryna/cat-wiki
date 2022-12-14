@@ -6,17 +6,19 @@ import "./Home.css";
 import { Link } from "react-router-dom";
 import WikiCatApi from "../services/WikiCatApi";
 import { useDebugValue } from "react";
+import { ArrowRight } from 'react-bootstrap-icons';
 
 function Home() {
     const [search, setSearch] = useState({search: ''});
     const [show, setShow] = useState(false);
     const [resultShow, setResultShow] = useState(false);
     const [cats, setCats] = useState([]);
+    const [favs, setFavs] = useState([]);
 
     const handleSearch = (event) => {
         const { value } = event.target
 
-        if(value.length >= 3) {
+        if(value.length >= 2) {
             setTimeout(() => {
                 setSearch({search: value})
                 setResultShow(true)
@@ -32,13 +34,18 @@ function Home() {
     const handleShow = () => setShow(true);
 
     useEffect(() => {
-
         WikiCatApi.search(search)
         .then(cats => {
             setCats(cats)
-            console.log(cats)
         })
     },[search])
+
+    useEffect(() => {
+        WikiCatApi.getFavs()
+        .then(favs => {
+            setFavs(favs)
+        })
+    },[])
 
     return (
         <>
@@ -59,7 +66,7 @@ function Home() {
                 {resultShow ?
                     <div className="results d-flex flex-column">
                         {cats.map((cat, index) =>
-                            <Link to={`/${cat.name}`} key={index} state={{cat}}>{cat.name}</Link>
+                            <Link className="result" to={`/${cat.name}`} key={index} state={{cat}}>{cat.name}</Link>
                         )}
                     </div> 
                  : 
@@ -80,25 +87,15 @@ function Home() {
             <hr/>
             <div className="d-flex justify-content-between align-items-end flex-sm-column flex-lg-row">
                 <h2>66+ Breeds For you<br/>to discover</h2>
-                <Link className="more" to="/top-ten">SEE MORE -</Link>
+                <Link className="more d-flex align-items-center" to="/top-ten" state={{favs}}>SEE MORE <ArrowRight className="ms-2" color="#29150799" size={20}/></Link>
             </div>
             <div className="cats row d-flex justify-content-between">
-                <Link to="#" className="col-lg-3 col-sm-6 cat">
-                    <img src={cat1} alt="cat1"/>
-                    <p>Bengal</p>
+                {favs.map((cat, index) => 
+                <Link to={`/${cat.name}`} state={{cat}} key={index} className="col-lg-3 col-sm-6 cat">
+                    <img src={cat.image.url} alt={cat.id}/>
+                    <p>{cat.name}</p>
                 </Link>
-                <Link to="#" className="col-lg-3 col-sm-6 cat">
-                    <img src={cat2} alt="cat1"/>
-                    <p>Savannah</p>
-                </Link> 
-                <Link to="#" className="col-lg-3 col-sm-6 cat">
-                    <img src={cat3} alt="cat1"/>
-                    <p>Norwegian Forest Cat</p>
-                </Link>
-                <Link to="#" className="col-lg-3 col-sm-6 cat">
-                    <img src={cat4} alt="cat1"/>
-                    <p>Selkirk Rex</p>
-                </Link>
+                )}
             </div>
         </section>
         <section className="section why-have-cats">
@@ -107,7 +104,6 @@ function Home() {
                     <hr />
                     <h2>Why should you<br/>have a cat?</h2>
                     <p>Having a cat around you can actually trigger the release of calming chemicals in your body which lower your stress and anxiety leves</p>
-                    <Link to="#">READ MORE -</Link>
                 </div>
                 <div className="d-flex col-lg-7 col-md-12">
                     <div className="d-flex flex-column align-items-end">

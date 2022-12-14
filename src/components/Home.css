@@ -81,6 +81,10 @@ span#inputGroup-sizing-lg {
     text-decoration: none;
 }
 
+.section a:hover {
+    color: #4D270C;
+}
+
 .section.most-search .cats {
     padding-top: 3rem;
 }
@@ -92,6 +96,8 @@ span#inputGroup-sizing-lg {
 .section.most-search .cats .cat img {
     border-radius: 23px;
     width: 100%;
+    object-fit: cover;
+    aspect-ratio: 1;
 }
 
 .section.most-search .cats .cat:nth-child(1) img {

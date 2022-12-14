@@ -4,7 +4,6 @@ const Dots = (numberInfo) => {
     const num = numberInfo.numberInfo
     return(
         <>
-        {console.log(num)}
         {(() => {
             switch (num) {
             case 1:

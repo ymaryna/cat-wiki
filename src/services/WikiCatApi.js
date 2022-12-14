@@ -14,6 +14,9 @@ httpApi.interceptors.response.use(
 )
 
 //API
-const search = (data) =>  console.info('search data => ', data) || httpApi.post('/search', data)
+const search = (data) =>  httpApi.post('/search', data)
+const searchImg = (id) => httpApi.get(`/cat-img/${id}`)
+const searchImgs = (type) => httpApi.get(`/cat-imgs/${type}`)
+const getFavs = () => httpApi.get(`/cat-favs`)
 
-export default { search }
+export default { search, searchImg, searchImgs, getFavs }

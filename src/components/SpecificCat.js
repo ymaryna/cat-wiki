@@ -1,15 +1,18 @@
-import { React } from "react";
+import { React, useEffect, useState } from "react";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 import './SpecificCat.css'
 import { cat1, g1, g2, g3, g4, g5, g6, g7, g8 } from "../assets";
 import { useParams, useLocation } from 'react-router-dom'
 import Dots from "./misc/Dots";
+import WikiCatApi from "../services/WikiCatApi";
 
 function SpecificCat() {
     const { cats } = useParams()
     const location = useLocation()
     const { cat } = location.state
+    const [img, setImg] = useState([]);
+    const [imgs, setImgs] = useState([]);
 
     const dots = (type) => {
         while (type <= 5) {
@@ -17,13 +20,25 @@ function SpecificCat() {
         }
     }
 
+    useEffect(() => {
+        WikiCatApi.searchImg(cat.reference_image_id)
+        .then(img => {
+            setImg(img)
+        })
+
+        WikiCatApi.searchImgs(cat.id)
+        .then(imgs => {
+            setImgs(imgs)
+        })
+
+    },[])
+
     return (
         <>
-        {console.log(cat)}
         <div className="container specific-cat">
             <div className="row">
                 <div className="col-lg-4 col-md-12 img-header">
-                    <img className="w-100" src={cat1} alt=""/>
+                    <img className="w-100" src={img.url} alt=""/>
                 </div>
                 <div className="col-lg-6 col-md-12 offset-md-1">
                     <h1>{cat.name}</h1>
@@ -88,14 +103,9 @@ function SpecificCat() {
             <div className="row d-flex justify-content-center">
                 <h2>Other photos</h2>
                 <div className="gallery row d-flex justify-content-center">
-                    <img className="col-lg-3 col-md-3 col-sm-12 mt-4" src={g1} alt=""/>
-                    <img className="col-lg-3 col-md-3 col-sm-12 mt-4" src={g2} alt=""/>
-                    <img className="col-lg-3 col-md-3 col-sm-12 mt-4" src={g3} alt=""/>
-                    <img className="col-lg-3 col-md-3 col-sm-12 mt-4" src={g4} alt=""/>
-                    <img className="col-lg-3 col-md-3 col-sm-12 mt-4" src={g5} alt=""/>
-                    <img className="col-lg-3 col-md-3 col-sm-12 mt-4" src={g6} alt=""/>
-                    <img className="col-lg-3 col-md-3 col-sm-12 mt-4" src={g7} alt=""/>
-                    <img className="col-lg-3 col-md-3 col-sm-12 mt-4" src={g8} alt=""/>
+                    {imgs.map((image, index) => 
+                    <img className="col-lg-3 col-md-3 col-sm-12 mt-4" key={index} src={image.url} alt=""/>
+                    )}
                 </div>
             </div>
         </div>
