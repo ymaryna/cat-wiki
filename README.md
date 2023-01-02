@@ -1,56 +1,90 @@
-# API TRELLO
+<!-- Please update value in the {}  -->
 
-Let's create an API for our project based on "Trello" service.
+<h1 align="center">Wiki Cat</h1>
 
-The API must handle the following resources:
+<div align="center">
+   Solution for a challenge from  <a href="http://devchallenges.io" target="_blank">Devchallenges.io</a>.
+</div>
 
-* Column
+<div align="center">
+  <h3>
+    <a href="https://wikicat.marinacid.es/">
+      Demo
+    </a>
+    <span> | </span>
+    <a href="https://{your-url-to-the-solution}">
+      Solution
+    </a>
+    <span> | </span>
+    <a href="https://devchallenges.io/challenges/f4NJ53rcfgrP6sBMD2jt">
+      Challenge
+    </a>
+  </h3>
+</div>
 
-| HTTP Method |     Path     |        Description        |
-| ----------- | ------------ | ------------------------- |
-| GET         | /columns     | get JSON array of columns |
-| POST        | /columns     | create column             |
-| GET         | /columns/:id | get JSON column detail    |
-| PATCH       | /columns/:id | update column             |
-| DELETE      | /columns/:id | delete column             |
+<!-- TABLE OF CONTENTS -->
 
-Example of the column object:
+## Table of Contents
 
+- [Overview](#overview)
+  - [Built With](#built-with)
+- [Features](#features)
+- [How to use](#how-to-use)
+- [Contact](#contact)
+- [Acknowledgements](#acknowledgements)
+
+<!-- OVERVIEW -->
+
+## Overview
+
+![screenshot](./public/img/screencapture-Wiki-Cat.png)
+
+Introduce your projects by taking a screenshot or a gif. Try to tell visitors a story about your project by answering:
+
+- Where can I see your demo?
+    - You can see my demo by clicking here https://wikicat.marinacid.es/
+
+### Built With
+
+<!-- This section should list any major frameworks that you built your project using. Here are a few examples.-->
+
+- [React](https://reactjs.org/)
+- [NodeJs](https://nodejs.org/en/)
+- [Express](https://expressjs.com/)
+
+
+## Features
+
+<!-- List the features of your application or follow the template. Don't share the figma file here :) -->
+
+This application/site was created as a submission to a [DevChallenges](https://devchallenges.io/challenges) challenge. The [challenge](https://devchallenges.io/challenges/f4NJ53rcfgrP6sBMD2jt) was to build an application to complete the given user stories.
+
+## How To Use
+
+<!-- Example: -->
+
+To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
+
+```bash
+# Clone this repository
+$ git clone https://github.com/your-user-name/your-project-name
+
+# Install dependencies
+$ npm install
+
+# Run the app
+$ npm start
 ```
-{
-  "position": 3,
-  "title": "Hola!",
-  "createdAt": "2019-03-06T14:45:43.808Z",
-  "updatedAt": "2019-03-06T14:45:43.808Z",
-  "cards": [],
-  "id": "5c7fdd173717da6f60e0e48f"
-}
-```
 
-* Card
+## Acknowledgements
 
-| HTTP Method |    Path    |       Description       |
-| ----------- | ---------- | ----------------------- |
-| GET         | /cards     | get JSON array of cards |
-| POST        | /cards     | create card             |
-| GET         | /cards/:id | get JSON card detail    |
-| PATCH       | /cards/:id | update card             |
-| DELETE      | /cards/:id | delete card             |
+<!-- This section should list any articles or add-ons/plugins that helps you to complete the project. This is optional but it will help you in the future. For example: -->
 
-Example of the card object:
+- [Steps to replicate a design with only HTML and CSS](https://devchallenges-blogs.web.app/how-to-replicate-design/)
+- [Node.js](https://nodejs.org/)
+- [Marked - a markdown parser](https://github.com/chjj/marked)
 
-```
-{
-  "position": 3,
-  "description": "description",
-  "imageUrl": "http://image.com",
-  "labels": ["Lab"],
-  "title": "Hola!",
-  "column": "5c7fdd173717da6f60e0e48f",
-  "createdAt": "2019-03-06T14:56:29.970Z",
-  "updatedAt": "2019-03-06T14:56:29.970Z",
-  "id": "5c7fdf9d16b55272897b939c"
-}
-```
+## Contact
 
-Check mongoose `Populate virtuals`: https://mongoosejs.com/docs/populate.html#populate-virtuals
+- Website [your-website.com](https://marinacid.es)
+- GitHub [@your-username](https://github.com/ymaryna)
